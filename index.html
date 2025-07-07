@@ -3,6 +3,7 @@
 <head>
   <title>My Simple Website</title>
   <style>
+    /* Your original button styles */
     button {
       background-color: pink;
       color: black;
@@ -12,12 +13,51 @@
       border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
+      position: relative; /* so it sits above stars */
+      z-index: 2;
+    }
+
+    /* Positioning your heading above stars too */
+    h1 {
+      position: relative;
+      z-index: 2;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Style for twinkling stars */
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 2s infinite;
+      z-index: 1; /* behind content */
+    }
+
+    /* Twinkle animation */
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 0.2; }
     }
   </style>
 </head>
-<body style="text-align:center; margin-top:100px; background-color: lightblue;">
+<body style="text-align:center; margin-top:100px; background-color: lightblue; overflow: hidden; position: relative; height: 100vh;">
   <h1>Vinudi</h1>
   <button onclick="alert('Hello!')">Click Me</button>
-</body>
-</html> 
 
+  <script>
+    const starsCount = 100;
+    for (let i = 0; i < starsCount; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      const size = Math.random() * 2 + 1 + 'px'; // size between 1-3px
+      star.style.width = size;
+      star.style.height = size;
+      star.style.top = Math.random() * window.innerHeight + 'px';
+      star.style.left = Math.random() * window.innerWidth + 'px';
+      star.style.animationDelay = (Math.random() * 2) + 's';
+      document.body.appendChild(star);
+    }
+  </script>
+</body>
+</html>
