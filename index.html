@@ -67,7 +67,7 @@
       document.body.appendChild(star);
     }
 
-    // 🎆 Fireworks explosion
+    // 🎆 Fireworks explosion function
     function explodeFirework() {
       const particleCount = 30;
       const colors = ['red', 'yellow', 'orange', 'white', 'cyan', 'magenta', 'blue', 'lime'];
@@ -96,21 +96,23 @@
         particle.style.transition = 'transform 1s ease-out, opacity 1s ease-out';
         document.body.appendChild(particle);
 
-        // Animate
         requestAnimationFrame(() => {
           particle.style.transform = `translate(${dx}px, ${dy}px)`;
           particle.style.opacity = 0;
         });
 
-        // Remove after animation
         setTimeout(() => {
           particle.remove();
         }, 1000);
       }
     }
 
-    // 🔘 Make button trigger fireworks
-    document.querySelector('button').onclick = explodeFirework;
+    // 🔘 Trigger 3 fireworks on button click
+    document.querySelector('button').onclick = () => {
+      explodeFirework();
+      explodeFirework();
+      explodeFirework();
+    };
   </script>
 </body>
 </html>
