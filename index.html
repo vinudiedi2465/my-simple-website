@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 
   <style>
-    /* Your original button styles — unchanged except for size */
+    /* Button styles */
     button {
       background-color: pink;
       color: black;
@@ -21,15 +21,15 @@
       z-index: 2;
     }
 
-    /* 🔹 Updated h1: Bigger and in Lobster font */
+    /* Heading style */
     h1 {
       position: relative;
       z-index: 2;
       font-family: 'Lobster', cursive;
-      font-size: 80px; /* You can increase to 100px if you want */
+      font-size: 80px;
     }
 
-    /* Star styles — unchanged */
+    /* Star styles */
     .star {
       position: absolute;
       background: white;
@@ -44,78 +44,20 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.3; }
     }
-
-    /* Rainbow semicircle styles — UPDATED to arch upward */
-    .rainbow-arc {
-      position: absolute;
-      width: 160px;
-      height: 80px;
-      border-top-left-radius: 160px 80px;
-      border-top-right-radius: 160px 80px;
-      border-top: 8px solid transparent;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      box-sizing: content-box;
-      opacity: 0.8;
-      animation: fadeOut 3s forwards;
-      z-index: 0;
-      /* No rotation, arcs face UP */
-    }
-
-    .rainbow-red {
-      border-top-color: red;
-      border-left-color: red;
-      border-right-color: red;
-    }
-    .rainbow-orange {
-      border-top-color: orange;
-      border-left-color: orange;
-      border-right-color: orange;
-    }
-    .rainbow-yellow {
-      border-top-color: yellow;
-      border-left-color: yellow;
-      border-right-color: yellow;
-    }
-    .rainbow-green {
-      border-top-color: green;
-      border-left-color: green;
-      border-right-color: green;
-    }
-    .rainbow-blue {
-      border-top-color: blue;
-      border-left-color: blue;
-      border-right-color: blue;
-    }
-    .rainbow-indigo {
-      border-top-color: indigo;
-      border-left-color: indigo;
-      border-right-color: indigo;
-    }
-    .rainbow-violet {
-      border-top-color: violet;
-      border-left-color: violet;
-      border-right-color: violet;
-    }
-
-    @keyframes fadeOut {
-      0% { opacity: 0.8; transform: scale(1) translateY(0); }
-      100% { opacity: 0; transform: scale(1.5) translateY(-20px); }
-    }
   </style>
 </head>
 <body style="text-align:center; margin-top:100px; background-color: lightblue; overflow: hidden; position: relative; height: 100vh;">
   <h1>Vinudi</h1>
-  <button onclick="createRainbowSemicircles()">Click Me</button>
+  <button>Click Me</button>
 
   <script>
-    // Stars creation code — unchanged
+    // ✨ Star background
     const starsCount = 100;
     for (let i = 0; i < starsCount; i++) {
       const star = document.createElement('div');
       star.classList.add('star');
 
-      const size = Math.random() * 4 + 2 + 'px'; // 2–6px
+      const size = Math.random() * 4 + 2 + 'px';
       star.style.width = size;
       star.style.height = size;
 
@@ -125,46 +67,50 @@
       document.body.appendChild(star);
     }
 
-    // Rainbow semicircle creation function
-    function createRainbowSemicircles() {
-      const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
-      const baseSize = 160;
-      const thickness = 8;
-      const count = 10;
+    // 🎆 Fireworks explosion
+    function explodeFirework() {
+      const particleCount = 30;
+      const colors = ['red', 'yellow', 'orange', 'white', 'cyan', 'magenta', 'blue', 'lime'];
 
-      for (let i = 0; i < count; i++) {
-        const container = document.createElement('div');
-        container.style.position = 'absolute';
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
 
-        container.style.top = Math.random() * (window.innerHeight - baseSize / 2) + 'px';
-        container.style.left = Math.random() * (window.innerWidth - baseSize) + 'px';
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.width = '6px';
+        particle.style.height = '6px';
+        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.borderRadius = '50%';
+        particle.style.zIndex = 1;
+        particle.style.opacity = 1;
 
-        colors.forEach((color, index) => {
-          const arc = document.createElement('div');
-          arc.classList.add('rainbow-arc', `rainbow-${color}`);
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = Math.random() * 100 + 50;
 
-          const sizeMultiplier = (colors.length - index) / colors.length;
-          const width = baseSize * sizeMultiplier;
-          const height = width / 2;
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
 
-          arc.style.width = width + 'px';
-          arc.style.height = height + 'px';
-          arc.style.borderWidth = thickness * sizeMultiplier + 'px';
-          arc.style.marginBottom = '-' + (thickness * sizeMultiplier * 2) + 'px';
+        particle.style.transition = 'transform 1s ease-out, opacity 1s ease-out';
+        document.body.appendChild(particle);
 
-          container.appendChild(arc);
+        // Animate
+        requestAnimationFrame(() => {
+          particle.style.transform = `translate(${dx}px, ${dy}px)`;
+          particle.style.opacity = 0;
         });
 
-        container.style.animation = 'fadeOut 3s forwards';
-        container.style.zIndex = '0';
-
-        document.body.appendChild(container);
-
+        // Remove after animation
         setTimeout(() => {
-          container.remove();
-        }, 3000);
+          particle.remove();
+        }, 1000);
       }
     }
+
+    // 🔘 Make button trigger fireworks
+    document.querySelector('button').onclick = explodeFirework;
   </script>
 </body>
 </html>
