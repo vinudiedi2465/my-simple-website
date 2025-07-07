@@ -13,31 +13,31 @@
       border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
-      position: relative; /* so it sits above stars */
+      position: relative;
       z-index: 2;
     }
 
-    /* Positioning your heading above stars too */
+    /* Keep heading above stars */
     h1 {
       position: relative;
       z-index: 2;
       font-family: Arial, sans-serif;
     }
 
-    /* Style for twinkling stars */
+    /* Bigger, brighter stars with glow */
     .star {
       position: absolute;
       background: white;
       border-radius: 50%;
-      opacity: 0.8;
+      opacity: 1;
       animation: twinkle 2s infinite;
-      z-index: 1; /* behind content */
+      z-index: 1;
+      box-shadow: 0 0 6px white; /* soft glow */
     }
 
-    /* Twinkle animation */
     @keyframes twinkle {
-      0%, 100% { opacity: 0.8; }
-      50% { opacity: 0.2; }
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
     }
   </style>
 </head>
@@ -50,9 +50,12 @@
     for (let i = 0; i < starsCount; i++) {
       const star = document.createElement('div');
       star.classList.add('star');
-      const size = Math.random() * 2 + 1 + 'px'; // size between 1-3px
+      
+      // 🔸 Bigger stars: size between 2 and 6px
+      const size = Math.random() * 4 + 2 + 'px';
       star.style.width = size;
       star.style.height = size;
+      
       star.style.top = Math.random() * window.innerHeight + 'px';
       star.style.left = Math.random() * window.innerWidth + 'px';
       star.style.animationDelay = (Math.random() * 2) + 's';
@@ -61,3 +64,4 @@
   </script>
 </body>
 </html>
+
