@@ -1,6 +1,6 @@
 
  
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>My Simple Website</title>
@@ -50,15 +50,16 @@
     /* Rainbow semicircle styles */
     .rainbow-arc {
       position: absolute;
-      width: 80px;
-      height: 40px;
-      border-bottom-left-radius: 80px 40px;
-      border-bottom-right-radius: 80px 40px;
+      width: 160px;  /* doubled size */
+      height: 80px;
+      border-bottom-left-radius: 160px 80px;
+      border-bottom-right-radius: 160px 80px;
       border: 8px solid transparent;
       box-sizing: content-box;
       opacity: 0.8;
       animation: fadeOut 3s forwards;
       z-index: 0;
+      transform: rotate(180deg); /* flip arcs UP */
     }
 
     .rainbow-red { border-bottom-color: red; border-left-color: red; border-right-color: red; }
@@ -99,7 +100,7 @@
     // Rainbow semicircle creation function
     function createRainbowSemicircles() {
       const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
-      const baseSize = 80;
+      const baseSize = 160;
       const thickness = 8;
       const count = 10;
 
