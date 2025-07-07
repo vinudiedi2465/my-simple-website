@@ -4,30 +4,34 @@
 <html>
 <head>
   <title>My Simple Website</title>
+
+  <!-- 🔹 Add Lobster font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
   <style>
-    /* Your original button styles — now with bigger size */
+    /* Your original button styles — unchanged except for size */
     button {
       background-color: pink;
       color: black;
       font-family: Arial, sans-serif;
-      padding: 15px 30px; /* bigger padding */
+      padding: 15px 30px;
       border: none;
       border-radius: 8px;
-      font-size: 24px; /* bigger font */
+      font-size: 24px;
       cursor: pointer;
       position: relative;
       z-index: 2;
     }
 
-    /* Keep heading above stars — now with bigger font */
+    /* 🔹 Updated h1: Bigger and in Lobster font */
     h1 {
       position: relative;
       z-index: 2;
-      font-family: Arial, sans-serif;
-      font-size: 48px; /* bigger name */
+      font-family: 'Lobster', cursive;
+      font-size: 80px; /* You can increase to 100px if you want */
     }
 
-    /* Bigger, brighter stars with glow */
+    /* Star styles — unchanged */
     .star {
       position: absolute;
       background: white;
@@ -35,7 +39,7 @@
       opacity: 1;
       animation: twinkle 2s infinite;
       z-index: 1;
-      box-shadow: 0 0 6px white; /* soft glow */
+      box-shadow: 0 0 6px white;
     }
 
     @keyframes twinkle {
