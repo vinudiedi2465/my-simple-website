@@ -1,27 +1,30 @@
-<!DOCTYPE html>
+
+ 
+    <!DOCTYPE html>
 <html>
 <head>
   <title>My Simple Website</title>
   <style>
-    /* Your original button styles */
+    /* Your original button styles — now with bigger size */
     button {
       background-color: pink;
       color: black;
       font-family: Arial, sans-serif;
-      padding: 10px 20px;
+      padding: 15px 30px; /* bigger padding */
       border: none;
       border-radius: 8px;
-      font-size: 16px;
+      font-size: 24px; /* bigger font */
       cursor: pointer;
       position: relative;
       z-index: 2;
     }
 
-    /* Keep heading above stars */
+    /* Keep heading above stars — now with bigger font */
     h1 {
       position: relative;
       z-index: 2;
       font-family: Arial, sans-serif;
+      font-size: 48px; /* bigger name */
     }
 
     /* Bigger, brighter stars with glow */
@@ -50,12 +53,11 @@
     for (let i = 0; i < starsCount; i++) {
       const star = document.createElement('div');
       star.classList.add('star');
-      
-      // 🔸 Bigger stars: size between 2 and 6px
-      const size =  Math.random() * 10 + 6 + 'px'; // 6–16px
+
+      const size = Math.random() * 4 + 2 + 'px'; // 2–6px
       star.style.width = size;
       star.style.height = size;
-      
+
       star.style.top = Math.random() * window.innerHeight + 'px';
       star.style.left = Math.random() * window.innerWidth + 'px';
       star.style.animationDelay = (Math.random() * 2) + 's';
@@ -64,4 +66,3 @@
   </script>
 </body>
 </html>
-
