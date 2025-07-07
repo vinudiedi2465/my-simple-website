@@ -1,6 +1,6 @@
 
  
-    <!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
   <title>My Simple Website</title>
@@ -46,13 +46,41 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.3; }
     }
+
+    /* Rainbow semicircle styles */
+    .rainbow-arc {
+      position: absolute;
+      width: 80px;
+      height: 40px;
+      border-bottom-left-radius: 80px 40px;
+      border-bottom-right-radius: 80px 40px;
+      border: 8px solid transparent;
+      box-sizing: content-box;
+      opacity: 0.8;
+      animation: fadeOut 3s forwards;
+      z-index: 0;
+    }
+
+    .rainbow-red { border-bottom-color: red; border-left-color: red; border-right-color: red; }
+    .rainbow-orange { border-bottom-color: orange; border-left-color: orange; border-right-color: orange; }
+    .rainbow-yellow { border-bottom-color: yellow; border-left-color: yellow; border-right-color: yellow; }
+    .rainbow-green { border-bottom-color: green; border-left-color: green; border-right-color: green; }
+    .rainbow-blue { border-bottom-color: blue; border-left-color: blue; border-right-color: blue; }
+    .rainbow-indigo { border-bottom-color: indigo; border-left-color: indigo; border-right-color: indigo; }
+    .rainbow-violet { border-bottom-color: violet; border-left-color: violet; border-right-color: violet; }
+
+    @keyframes fadeOut {
+      0% { opacity: 0.8; transform: scale(1) translateY(0); }
+      100% { opacity: 0; transform: scale(1.5) translateY(-20px); }
+    }
   </style>
 </head>
 <body style="text-align:center; margin-top:100px; background-color: lightblue; overflow: hidden; position: relative; height: 100vh;">
   <h1>Vinudi</h1>
-  <button onclick="alert('Hello!')">Click Me</button>
+  <button onclick="createRainbowSemicircles()">Click Me</button>
 
   <script>
+    // Stars creation code — unchanged
     const starsCount = 100;
     for (let i = 0; i < starsCount; i++) {
       const star = document.createElement('div');
@@ -66,6 +94,47 @@
       star.style.left = Math.random() * window.innerWidth + 'px';
       star.style.animationDelay = (Math.random() * 2) + 's';
       document.body.appendChild(star);
+    }
+
+    // Rainbow semicircle creation function
+    function createRainbowSemicircles() {
+      const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+      const baseSize = 80;
+      const thickness = 8;
+      const count = 10;
+
+      for (let i = 0; i < count; i++) {
+        const container = document.createElement('div');
+        container.style.position = 'absolute';
+
+        container.style.top = Math.random() * (window.innerHeight - baseSize / 2) + 'px';
+        container.style.left = Math.random() * (window.innerWidth - baseSize) + 'px';
+
+        colors.forEach((color, index) => {
+          const arc = document.createElement('div');
+          arc.classList.add('rainbow-arc', `rainbow-${color}`);
+
+          const sizeMultiplier = (colors.length - index) / colors.length;
+          const width = baseSize * sizeMultiplier;
+          const height = width / 2;
+
+          arc.style.width = width + 'px';
+          arc.style.height = height + 'px';
+          arc.style.borderWidth = thickness * sizeMultiplier + 'px';
+          arc.style.marginBottom = '-' + (thickness * sizeMultiplier * 2) + 'px';
+
+          container.appendChild(arc);
+        });
+
+        container.style.animation = 'fadeOut 3s forwards';
+        container.style.zIndex = '0';
+
+        document.body.appendChild(container);
+
+        setTimeout(() => {
+          container.remove();
+        }, 3000);
+      }
     }
   </script>
 </body>
