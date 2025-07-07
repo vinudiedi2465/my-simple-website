@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 
   <style>
-    /* Button styles */
     button {
       background-color: pink;
       color: black;
@@ -21,7 +20,6 @@
       z-index: 2;
     }
 
-    /* Heading style */
     h1 {
       position: relative;
       z-index: 2;
@@ -29,7 +27,6 @@
       font-size: 80px;
     }
 
-    /* Star styles */
     .star {
       position: absolute;
       background: white;
@@ -51,7 +48,7 @@
   <button>Click Me</button>
 
   <script>
-    // ✨ Star background
+    // ⭐ Star background
     const starsCount = 100;
     for (let i = 0; i < starsCount; i++) {
       const star = document.createElement('div');
@@ -67,7 +64,7 @@
       document.body.appendChild(star);
     }
 
-    // 🎆 Fireworks explosion function (bigger)
+    // 🎆 Firework with streamers
     function explodeFirework() {
       const particleCount = 30;
       const colors = ['red', 'yellow', 'orange', 'white', 'cyan', 'magenta', 'blue', 'lime'];
@@ -80,7 +77,7 @@
         particle.style.position = 'absolute';
         particle.style.left = x + 'px';
         particle.style.top = y + 'px';
-        particle.style.width = '10px';  // 🔸 increased from 6px
+        particle.style.width = '10px';
         particle.style.height = '10px';
         particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         particle.style.borderRadius = '50%';
@@ -88,12 +85,12 @@
         particle.style.opacity = 1;
 
         const angle = Math.random() * 2 * Math.PI;
-        const distance = Math.random() * 150 + 100;  // 🔸 increased from 100+50
+        const distance = Math.random() * 150 + 100;
 
         const dx = Math.cos(angle) * distance;
         const dy = Math.sin(angle) * distance;
 
-        particle.style.transition = 'transform 1s ease-out, opacity 1s ease-out';
+        particle.style.transition = 'transform 2s ease-out, opacity 2s ease-out'; // slower
         document.body.appendChild(particle);
 
         requestAnimationFrame(() => {
@@ -103,15 +100,48 @@
 
         setTimeout(() => {
           particle.remove();
-        }, 1000);
+        }, 2000);
+      }
+
+      // 🎊 Streamers (rectangular)
+      const streamerCount = 10;
+      for (let i = 0; i < streamerCount; i++) {
+        const streamer = document.createElement('div');
+        streamer.style.position = 'absolute';
+        streamer.style.left = x + 'px';
+        streamer.style.top = y + 'px';
+        streamer.style.width = '4px';
+        streamer.style.height = '20px';
+        streamer.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        streamer.style.borderRadius = '2px';
+        streamer.style.zIndex = 1;
+        streamer.style.opacity = 1;
+
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = Math.random() * 100 + 50;
+
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
+
+        streamer.style.transition = 'transform 2s ease-out, opacity 2s ease-out';
+        document.body.appendChild(streamer);
+
+        requestAnimationFrame(() => {
+          streamer.style.transform = `translate(${dx}px, ${dy}px) rotate(${Math.random() * 360}deg)`;
+          streamer.style.opacity = 0;
+        });
+
+        setTimeout(() => {
+          streamer.remove();
+        }, 2000);
       }
     }
 
-    // 🔘 Launch 3 fireworks on click
+    // 🔘 Launch 5 fireworks on click
     document.querySelector('button').onclick = () => {
-      explodeFirework();
-      explodeFirework();
-      explodeFirework();
+      for (let i = 0; i < 5; i++) {
+        setTimeout(explodeFirework, i * 300); // slight delay between each firework
+      }
     };
   </script>
 </body>
