@@ -67,7 +67,7 @@
       document.body.appendChild(star);
     }
 
-    // 🎆 Fireworks explosion function
+    // 🎆 Fireworks explosion function (bigger)
     function explodeFirework() {
       const particleCount = 30;
       const colors = ['red', 'yellow', 'orange', 'white', 'cyan', 'magenta', 'blue', 'lime'];
@@ -80,15 +80,15 @@
         particle.style.position = 'absolute';
         particle.style.left = x + 'px';
         particle.style.top = y + 'px';
-        particle.style.width = '6px';
-        particle.style.height = '6px';
+        particle.style.width = '10px';  // 🔸 increased from 6px
+        particle.style.height = '10px';
         particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         particle.style.borderRadius = '50%';
         particle.style.zIndex = 1;
         particle.style.opacity = 1;
 
         const angle = Math.random() * 2 * Math.PI;
-        const distance = Math.random() * 100 + 50;
+        const distance = Math.random() * 150 + 100;  // 🔸 increased from 100+50
 
         const dx = Math.cos(angle) * distance;
         const dy = Math.sin(angle) * distance;
@@ -107,7 +107,7 @@
       }
     }
 
-    // 🔘 Trigger 3 fireworks on button click
+    // 🔘 Launch 3 fireworks on click
     document.querySelector('button').onclick = () => {
       explodeFirework();
       explodeFirework();
