@@ -41,6 +41,29 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.3; }
     }
+
+    /* Added styling for button click animation */
+    .button-clicked {
+      transform: scale(1.2);
+      animation: buttonGrowShrink 0.4s ease-out;
+    }
+
+    @keyframes buttonGrowShrink {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* Background color change effect */
+    .background-firework {
+      transition: background-color 1s ease;
+    }
   </style>
 </head>
 <body style="text-align:center; margin-top:100px; background-color: lightblue; overflow: hidden; position: relative; height: 100vh;">
@@ -135,13 +158,30 @@
           streamer.remove();
         }, 2000);
       }
+
+      // 🔵 Change background color when fireworks explode
+      document.body.classList.add('background-firework');
+      document.body.style.backgroundColor = 'black'; // change to a dark color during the fireworks
+
+      setTimeout(() => {
+        document.body.style.backgroundColor = 'lightblue'; // reset to the original color
+      }, 3000);
     }
 
-    // 🔘 Launch 5 fireworks on click
+    // 🔘 Launch 5 fireworks on click with additional effects
     document.querySelector('button').onclick = () => {
+      const button = document.querySelector('button');
+      button.classList.add('button-clicked'); // add animation to button
+
+      // Fireworks effect
       for (let i = 0; i < 5; i++) {
         setTimeout(explodeFirework, i * 300); // slight delay between each firework
       }
+
+      // Remove button animation class after 400ms
+      setTimeout(() => {
+        button.classList.remove('button-clicked');
+      }, 400);
     };
   </script>
 </body>
