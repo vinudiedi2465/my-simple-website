@@ -42,6 +42,12 @@
       50% { opacity: 0.3; }
     }
 
+    /* Glowing effect for the name */
+    .glow {
+      text-shadow: 0 0 10px teal, 0 0 20px teal, 0 0 30px teal, 0 0 40px #00b3b3, 0 0 50px #00b3b3, 0 0 75px #00b3b3;
+      color: #00b3b3; /* Teal color */
+    }
+
     /* Added styling for button click animation */
     .button-clicked {
       transform: scale(1.2);
@@ -178,10 +184,19 @@
         setTimeout(explodeFirework, i * 300); // slight delay between each firework
       }
 
+      // Apply the glowing effect to the name
+      const nameElement = document.querySelector('h1');
+      nameElement.classList.add('glow');
+
       // Remove button animation class after 400ms
       setTimeout(() => {
         button.classList.remove('button-clicked');
       }, 400);
+
+      // Remove the glow effect after 3 seconds
+      setTimeout(() => {
+        nameElement.classList.remove('glow');
+      }, 3000);
     };
   </script>
 </body>
