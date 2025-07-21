@@ -2,9 +2,202 @@
 <html>
 <head>
   <title>My Simple Website</title>
+
+  <!-- 🔹 Add Lobster font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+  <style>
+    button {
+      background-color: pink;
+      color: black;
+      font-family: Arial, sans-serif;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 24px;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 2;
+      font-family: 'Lobster', cursive;
+      font-size: 80px;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 1;
+      animation: twinkle 2s infinite;
+      z-index: 1;
+      box-shadow: 0 0 6px white;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* Glowing effect for the name */
+    .glow {
+      text-shadow: 0 0 10px teal, 0 0 20px teal, 0 0 30px teal, 0 0 40px #00b3b3, 0 0 50px #00b3b3, 0 0 75px #00b3b3;
+      color: #00b3b3; /* Teal color */
+    }
+
+    /* Added styling for button click animation */
+    .button-clicked {
+      transform: scale(1.2);
+      animation: buttonGrowShrink 0.4s ease-out;
+    }
+
+    @keyframes buttonGrowShrink {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* Background color change effect */
+    .background-firework {
+      transition: background-color 1s ease;
+    }
+  </style>
 </head>
-<body style="text-align:center; margin-top:100px;">
+<body style="text-align:center; margin-top:100px; background-color: lightblue; overflow: hidden; position: relative; height: 100vh;">
   <h1>Vinudi</h1>
-  <button onclick="alert('Hello!')">Click Me</button>
+  <button>Click Me</button>
+
+  <script>
+    // ⭐ Star background
+    const starsCount = 100;
+    for (let i = 0; i < starsCount; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+
+      const size = Math.random() * 4 + 2 + 'px';
+      star.style.width = size;
+      star.style.height = size;
+
+      star.style.top = Math.random() * window.innerHeight + 'px';
+      star.style.left = Math.random() * window.innerWidth + 'px';
+      star.style.animationDelay = (Math.random() * 2) + 's';
+      document.body.appendChild(star);
+    }
+
+    // 🎆 Firework with streamers
+    function explodeFirework() {
+      const particleCount = 30;
+      const colors = ['red', 'yellow', 'orange', 'white', 'cyan', 'magenta', 'blue', 'lime'];
+
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.width = '10px';
+        particle.style.height = '10px';
+        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.borderRadius = '50%';
+        particle.style.zIndex = 1;
+        particle.style.opacity = 1;
+
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = Math.random() * 150 + 100;
+
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
+
+        particle.style.transition = 'transform 2s ease-out, opacity 2s ease-out'; // slower
+        document.body.appendChild(particle);
+
+        requestAnimationFrame(() => {
+          particle.style.transform = `translate(${dx}px, ${dy}px)`;
+          particle.style.opacity = 0;
+        });
+
+        setTimeout(() => {
+          particle.remove();
+        }, 2000);
+      }
+
+      // 🎊 Streamers (rectangular)
+      const streamerCount = 10;
+      for (let i = 0; i < streamerCount; i++) {
+        const streamer = document.createElement('div');
+        streamer.style.position = 'absolute';
+        streamer.style.left = x + 'px';
+        streamer.style.top = y + 'px';
+        streamer.style.width = '4px';
+        streamer.style.height = '20px';
+        streamer.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        streamer.style.borderRadius = '2px';
+        streamer.style.zIndex = 1;
+        streamer.style.opacity = 1;
+
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = Math.random() * 100 + 50;
+
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
+
+        streamer.style.transition = 'transform 2s ease-out, opacity 2s ease-out';
+        document.body.appendChild(streamer);
+
+        requestAnimationFrame(() => {
+          streamer.style.transform = `translate(${dx}px, ${dy}px) rotate(${Math.random() * 360}deg)`;
+          streamer.style.opacity = 0;
+        });
+
+        setTimeout(() => {
+          streamer.remove();
+        }, 2000);
+      }
+
+      // 🔵 Change background color when fireworks explode
+      document.body.classList.add('background-firework');
+      document.body.style.backgroundColor = 'black'; // change to a dark color during the fireworks
+
+      setTimeout(() => {
+        document.body.style.backgroundColor = 'lightblue'; // reset to the original color
+      }, 3000);
+    }
+
+    // 🔘 Launch 5 fireworks on click with additional effects
+    document.querySelector('button').onclick = () => {
+      const button = document.querySelector('button');
+      button.classList.add('button-clicked'); // add animation to button
+
+      // Fireworks effect
+      for (let i = 0; i < 5; i++) {
+        setTimeout(explodeFirework, i * 300); // slight delay between each firework
+      }
+
+      // Apply the glowing effect to the name
+      const nameElement = document.querySelector('h1');
+      nameElement.classList.add('glow');
+
+      // Remove button animation class after 400ms
+      setTimeout(() => {
+        button.classList.remove('button-clicked');
+      }, 400);
+
+      // Remove the glow effect after 3 seconds
+      setTimeout(() => {
+        nameElement.classList.remove('glow');
+      }, 3000);
+    };
+  </script>
 </body>
 </html>
